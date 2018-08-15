@@ -57,9 +57,19 @@ module.exports = function(app){
                         score = 0;
                         console.log(bestMatch(userDifferenceScores));
                         var finalMatch = userDifferenceScores[1];
-                        console.log("Final Match: " + finalMatch);
+                        console.log("Final Match Number: " + finalMatch);
+                        
+                        for(var k = 0; k < userInfo.length; k++) {
+
+                            if(userInfo[k].userScore == finalMatch) {
+                                console.log("Winning Match: " + userInfo[k].name + " " + userInfo[k].picture);
+                            }
+                            else {
+                                console.log("Calculating best matches");
+                            }
+                        }
                         userDifferenceScores = [];
-                        userInfo = [];
+                        
                     }
                     else if(e === friends[currentUserSpace].scores.length - 1) {
                         userDifferenceScores.push(score);
@@ -104,10 +114,11 @@ module.exports = function(app){
                   }
                   
                   
-                  
+               
 
                    
             };
+            userInfo = [];
 
             //displayMatch();
 
