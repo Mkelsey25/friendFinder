@@ -16,8 +16,7 @@ module.exports = function(app){
         
             friends.push(request.body);
             //friends.push(request.body.scores);
-            response.json(true);
-            console.log("It worked?");
+            //console.log("It worked?");
 
             
 
@@ -29,23 +28,24 @@ module.exports = function(app){
                 console.log(friends[potentialMatchSpace]); 
                 
                 for(var e = 0; e < friends[currentUserSpace].scores.length; e++) {
+
                     function difference (a, b,) {
                         //a = parseInt(friends[currentUserSpace].scores[e]);
                         //b = parseInt(friends[potentialMatchSpace].scores[e]);
                         a = parseInt(friends[currentUserSpace].scores[e]);
                         b = parseInt(friends[potentialMatchSpace].scores[e]);
                        var newScore = Math.abs(a - b);
-                       console.log("NEW SCORE");
-                       console.log(newScore);
+                       //console.log("NEW SCORE");
+                       //console.log(newScore);
                        score += parseInt(newScore);
-                       console.log("SCORE: " + score);
+                       //console.log("SCORE: " + score);
                        
                        //console.log(score);
 
 
                         if(i === friends.length - 1 && e === friends[currentUserSpace].scores.length - 1) {
                         userDifferenceScores.push(score);
-                        console.log(userDifferenceScores);
+                        //console.log(userDifferenceScores);
                         singleUserInfo = {
                             name: friends[potentialMatchSpace].name,
                             userScore: score,
@@ -53,21 +53,28 @@ module.exports = function(app){
     
                         };
                         userInfo.push(singleUserInfo);
-                        console.log(userInfo);
+                        //console.log(userInfo);
                         score = 0;
                         console.log(bestMatch(userDifferenceScores));
                         var finalMatch = userDifferenceScores[1];
-                        console.log("Final Match Number: " + finalMatch);
+                        module.exports = finalMatch;
+                        //console.log("Final Match Number: " + finalMatch);
                         
                         for(var k = 0; k < userInfo.length; k++) {
 
-                            if(userInfo[k].userScore == finalMatch) {
+                            if(userInfo[k].userScore == finalMatch && userInfo[k].name != friends[currentUserSpace].name) {
                                 console.log("Winning Match: " + userInfo[k].name + " " + userInfo[k].picture);
-                            }
+                                var winningUser = userInfo[k];
+                                response.json(winningUser + userInfo[k].picture);
+                                }
+
                             else {
                                 console.log("Calculating best matches");
                             }
+                            
                         }
+                        
+
                         userDifferenceScores = [];
                         
                     }
@@ -81,7 +88,7 @@ module.exports = function(app){
                         };
 
                         userInfo.push(singleUserInfo);
-                        console.log("User Info Array: " + userInfo);
+                        //console.log("User Info Array: " + userInfo);
                         score = 0;
                         }
                        
@@ -90,8 +97,6 @@ module.exports = function(app){
                     }
                    }
                    difference();
-                   
-
                 }
                 console.log(userDifferenceScores);
                 
@@ -119,8 +124,6 @@ module.exports = function(app){
                    
             };
             userInfo = [];
-
-            //displayMatch();
 
 
     });
