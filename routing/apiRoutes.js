@@ -1,4 +1,10 @@
 var friends = require("../app/data/friends.js");
+var singleUserInfo = {
+    name:"",
+    score:"",
+    picture: ""
+};
+var userInfo = [];
 var userDifferenceScores = [];
 var score = 0;
 module.exports = function(app){
@@ -36,19 +42,39 @@ module.exports = function(app){
                        
                        //console.log(score);
 
+
                         if(i === friends.length - 1 && e === friends[currentUserSpace].scores.length - 1) {
                         userDifferenceScores.push(score);
                         console.log(userDifferenceScores);
+                        singleUserInfo = {
+                            name: friends[potentialMatchSpace].name,
+                            userScore: score,
+                            picture: friends[potentialMatchSpace].photo
+    
+                        };
+                        userInfo.push(singleUserInfo);
+                        console.log(userInfo);
                         score = 0;
                         console.log(bestMatch(userDifferenceScores));
                         var finalMatch = userDifferenceScores[1];
                         console.log("Final Match: " + finalMatch);
                         userDifferenceScores = [];
+                        userInfo = [];
                     }
                     else if(e === friends[currentUserSpace].scores.length - 1) {
                         userDifferenceScores.push(score);
+                        singleUserInfo = {
+                            name: friends[potentialMatchSpace].name,
+                            userScore: score,
+                            picture: friends[potentialMatchSpace].photo
+    
+                        };
+
+                        userInfo.push(singleUserInfo);
+                        console.log("User Info Array: " + userInfo);
                         score = 0;
-                       }
+                        }
+                       
                     else {
                         console.log("Still calculating... please hold.");
                     }
