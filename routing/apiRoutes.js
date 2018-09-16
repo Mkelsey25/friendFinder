@@ -65,7 +65,7 @@ module.exports = function(app){
                             if(userInfo[k].userScore == finalMatch && userInfo[k].name != friends[currentUserSpace].name) {
                                 console.log("Winning Match: " + userInfo[k].name + " " + userInfo[k].picture);
                                 var winningUser = userInfo[k];
-                                response.json(winningUser + userInfo[k].picture);
+                                response.json(winningUser);
                                 }
 
                             else {
